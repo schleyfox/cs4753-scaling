@@ -1,0 +1,34 @@
+upstream scaling_upstream {
+   server 127.0.0.1:4567;
+}
+
+server {
+  listen 30001;
+
+  server_name _;
+
+  root /Users/ben/projects/school/cs4753-scaling;
+                  
+  access_log /var/log/nginx/cs4753-scaling.access.log main;
+
+  error_log /var/log/nginx/cs4753-scaling.error.log notice;
+  # error_log /dev/null notice;
+  
+  
+  location / {
+    # auth is disabled for this server
+    # auth_basic            "Restricted";
+    # auth_basic_user_file  /etc/nginx/servers/nabewise.users;
+    include /opt/local/etc/nginx/common/proxy.conf;
+
+    if (!-f $request_filename) {
+      proxy_pass http://scaling_upstream;
+      break;
+    }
+  }
+
+  location = /500.html {
+    root /Users/ben/projects/school/cs4753-scaling;
+  }
+}
+

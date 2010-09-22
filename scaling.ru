@@ -1,4 +1,4 @@
 require 'rubygems'
-require 'base'
+require 'evented'
 
 run Sinatra::Application
