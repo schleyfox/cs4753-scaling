@@ -1,0 +1,10 @@
+---
+    environment: production
+    address: 127.0.0.1
+    user: ben
+    port: 4567
+    pid: pids/thin.pid
+    rackup: scaling.ru
+    max_conns: 1024
+    timeout: 30
+    max_persistent_conns: 512
